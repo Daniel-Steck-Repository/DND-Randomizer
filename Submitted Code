@@ -1,0 +1,159 @@
+# Daniel Steck    
+#Prog 108 PP3
+#10/21/2020
+
+import random
+
+
+
+#This is a functions i made to roll 4 d6 and drop the lowest. A common way of generating stats
+def rollStats():
+  #counter = 0
+  diceRolls = []
+  while len(diceRolls) < 4:  
+    diceRolls.append(random.randint(1, 6))  
+ 
+  diceRolls.sort(reverse=True)
+  diceRolls.pop()
+
+  statNum = sum(diceRolls)
+  return statNum
+
+
+#Displays the title and retrevies the users name
+def displayTitle():  
+  print()  
+  print("Hello new user")
+  print("Welcome to this random character generator")
+  print("-------------------------------------------------")
+  print("Before we get started I have one question for you")
+  name = str(input("What is your name?   "))
+  return name
+
+
+#Function that randomly assigns gender (three options)
+def charGender():
+  genderRand = (random.randint(1, 3))
+  if genderRand == 1:
+      genderChoice = "Male"
+  elif genderRand == 2:
+      genderChoice = "Female"
+  else:
+      genderChoice = "Other"
+  return genderChoice
+
+
+#Function that assigns a random race from DND 5E
+def charRace():
+  raceRand = (random.randint(0, 39))
+  raceList = ["Aarakocra","Aasimar","Bugbear","Centaur","Changeling","Dragonborn",
+      "Dwarf","Elf","Firbolg","Genasi","Gith","Gnome","Goblin","Goliath",
+      "Half-Elf","Half-Orc","Halfling","Hobgoblin","Human","Kalashtar","Kenku",
+      "Kobold","Leonin","Lizardfolk","Loxodon","Minotaur","Orc","Satyr","Shifter",
+      "Simic Hybrid","Tabaxi","Tiefling","Tortle","Triton","Vedalken",
+      "Verdan","Warforged","Yuan-Ti Pureblood","Grung","Locathah"]
+  chosenRace = raceList[raceRand]
+  return chosenRace
+    
+#Function that assigns a random Class from DND 5E
+def charClass():
+  classRand = (random.randint(0, 12))
+  classList = ["Artificer","Barbarian","Bard","Cleric","Druid","Fighter","Monk",
+        "Paladin","Ranger","Rogue","Sorcerer","Warlock","Wizard"]
+  choosenClass = classList[classRand]
+  return choosenClass
+
+#This Function takes the class of the character and then generates the hitpoints for the character using the rules from dnd
+##max of the dice size then rolls two more dice before summing the total
+def hitClass(classChosen):
+  if classChosen == "Barbarian":
+      firstlevel = 12
+      level2 = random.randint(1, firstlevel+1)
+      level3 = random.randint(1, firstlevel+1)
+      totalHP = firstlevel + level2 + level3
+  elif classChosen == "Fighter" or "Paladin" or "Ranger":
+      firstlevel = 10
+      level2 = random.randint(1, firstlevel+1)
+      level3 = random.randint(1, firstlevel+1)
+      totalHP = firstlevel + level2 + level3
+  elif classChosen == "Artificer" or "Bard" or "Cleric" or "Druid" or "Monk" or "Warlock":
+      firstlevel = 8
+      level2 = random.randint(1, firstlevel+1)
+      level3 = random.randint(1, firstlevel+1)
+      totalHP = firstlevel + level2 + level3
+  elif classChosen == "Sorcerer" or "Wizard":
+      firstlevel = 6
+      level2 = random.randint(1, firstlevel+1)
+      level3 = random.randint(1, firstlevel+1)
+      totalHP = firstlevel + level2 + level3      
+  return totalHP
+
+#Main function that puts all the pieces together
+def main():
+  userName = displayTitle()
+  print()
+  print("Thank you for choosing this program " + userName + ".")
+  print()
+  print("...")
+  print("...")
+  print()
+  print("We have generated the race and gender of the character.")
+  print()
+   
+
+    #These function calls give us all the needed randomized information
+  gender = charGender()
+  race = charRace()
+  chosenClass = charClass()
+  hitPoints = hitClass(chosenClass)
+  statSTR = rollStats()
+  statDEX = rollStats()
+  statCON = rollStats()
+  statINT = rollStats()
+  statWIS = rollStats()
+  statCHA = rollStats()
+
+    #This is a small print statement that collects the name given to this character by the user
+  print("Race: " + race)
+  print("Gender: " + gender)
+  print(".............................................")
+  print("Now that you know the race and gender of your new character.")
+  charName = str(input("Please give us the name of this character:   "))
+
+    #Basic print statements to make it look nicer
+  print()
+  print("...")
+  print("...")
+  print("...")
+  print()
+  print("Character Generated!")
+  print()
+  print()
+
+
+  #This is a print statement that Prints the character in a nice format
+  print("Creator: " + userName)
+  print("===============================================")
+  print("Character: " + charName + "          Gender: " + gender)
+  print("Race: " + race + "           Class: " + chosenClass)
+  print("-----------------------------------------------")
+  print("Hit Points: " + str(hitPoints))
+  print()
+  print("STR: " + str(statSTR) + "            DEX: " + str(statDEX))
+  print("CON: " + str(statCON) + "            INT: " + str(statINT))
+  print("WIS: " + str(statWIS) + "            CHA: " + str(statCHA))
+  print()
+  print()
+  print("Thank you again " + userName + " for choosing this program.")
+  print("I also hope you enjoy this new character.")
+  print()
+    
+
+    
+
+
+
+
+if __name__ == "__main__":
+  main()
+    
